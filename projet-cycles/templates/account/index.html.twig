@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace{% endblock %}
+
+{% block content %}
+   <h1>Mon Espace</h1>
+
+    Bonjour {{ app.user.firstName }}, bienvenue dans ton espace. Ici tu pourras gérer ton mot de passe , tes adresses et tes commandes.
+    <ul class="list-group mt-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a id="account_password" href="{{ path('account_password') }}">Modifier mon mot de passe</a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a id="account_address" href="{{ path('account_address') }}">Gérer mes adresses.</a>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a id="account_command" href="">Gérer mes commande.</a>
+        </li>
+    </ul>
+
+{% endblock %}
+

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande.{% endblock %}
+
+{% block content %}
+    <h1>Je passe ma commande </h1>
+    <a id="account_password" href="{{ path('cart') }}">Retourner à mon panier</a>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+
+            {% set formAddresses %}
+                {{  form(form.addresses) }}
+            {% endset %}
+            {% set formCarriers %}
+                {{  form(form.carriers) }}
+            {% endset %}            <h4>Choisir l'adresse de livraison</h4>
+
+            <ul class="list-group mb-5">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ formAddresses|replace({'[br]': '<br/>'}) |raw}}
+                </li>  </ul>
+            <h4>Choisir le transporteur</h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ formCarriers|replace({'[br]': '<br/>'}) |raw}}
+                </li>
+            </ul>
+            <br>
+        </div>
+        <div class="col-md-6">
+            <h4>Récapitulatif de la commande</h4>
+                <div class="order_summary">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item">
+                        {% for product in cart %}
+                            <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="75px">
+                            <span>{{ product.product.name }}</span>
+                            <span>{{ product.product.subTitle }} </span>
+                            <strong>x {{ product.quantity }}</strong>
+                        {% endfor %}</li>
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+    </div>
+
+    </div>
+{% endblock %}

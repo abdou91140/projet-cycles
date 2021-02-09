@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+    <h2>Mon Panier</h2>
+    <a id="account_password" href="{{ path('products') }}">Retourner aux vélos</a>
+
+    {% if cart|length >0%}
+    <div class="cart-wrap">
+        <div class="main-heading">Liste</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Total</th>
+                <th></th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% set subTotal = null %}
+            {% set quantityTotal = null %}
+
+            {% for product in cart %}
+                <tr>
+                    <td>
+                        <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="100px">
+                    </td>
+                    <td>
+                        {{ product.product.name }}
+                    </td>
+                    <td>
+                        x {{ product.quantity }}
+                    </td>
+                    <td>
+                        {{ (product.product.price / 100) | number_format(2,',','.')}} €
+                    </td>
+                    <td>
+                        {{ ((product.product.price * product.quantity)/ 100) | number_format(2,',','.')}} €
+                    </td>
+                    <td> _________</td>
+                    <td>
+                                <span style="margin-left: 5px"><button  type="button" class="btn btn-outline-info btn-sm"><a href="{{ path('add_to_cart', {'id': product.product.id}) }}" class="fa fa-plus"></a>
+                                </button></span>
+                        <span> <button type="button" class="btn btn-outline-warning btn-sm"><a href="{{ path('decrease_to_cart', {'id': product.product.id}) }}" class="fa fa-minus"></a>
+                                </button></span>
+                    </td>
+                    <td>
+                    <span> <button type="button" class="btn btn-outline-danger btn-sm"><a href="{{ path('delete_to_cart', {'id': product.product.id}) }}" class="fa fa-trash"></a>
+                                </button></span></td>
+                </tr>
+                {% set subTotal = subTotal + (product.product.price * product.quantity) %}
+                {% set quantityTotal = quantityTotal+ product.quantity %}
+
+            {% endfor %}
+            </tbody>
+        </table></div>
+
+
+    <div class="text-right mb-5">
+        <b>Nombre de produit : </b> <span class="subtotal">{{ quantityTotal }}</span><br>
+        {#            <b> </b><div class="subtotal">{{ (subTotal/ 100 )| number_format(2,',','.')}} €</div>#}
+        <b> Total de mon panier :</b>  <span class="price-total">{{ (subTotal / 100 )| number_format(2,',','.')}} €</span>
+    </div>
+    <a href="{{ path('order') }}" title=""><button type="button" class="btn btn-block btn-outline-success">Valider mon panier</button></a>
+    {% else %}
+        <div class="jumbotron-fluid"><h1 class="text-center mt-lg-5">Panier vide !</h1></div>
+
+    {% endif %}
+
+{% endblock %}
