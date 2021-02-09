@@ -1,0 +1,20 @@
+/* Navbar */
+/* Header */
+/* Body */
+body {
+    position: relative;
+}
+.block_small{
+    max-width: 600px;
+    margin: auto;
+}
+/* Footer*/
+
+.footer-custom{
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(238, 238, 238);
+    padding-top: 15px ;
+}
