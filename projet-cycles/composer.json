@@ -9,6 +9,7 @@
         "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "amphp/http-client": "^4.5",
         "components/jquery": "^3.5",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
@@ -87,13 +88,7 @@
         },
         "post-install-cmd": [
             "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts",
-            "rm -rf public/bootstrap",
-            "cp -R vendor/twbs/bootstrap/dist public/bootstrap",
-            "rm -rf public/jquery",
-            "cp -R vendor/components/jquery public/jquery"]
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
